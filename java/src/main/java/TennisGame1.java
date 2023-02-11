@@ -29,18 +29,17 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
         if (m_score1 == m_score2) {
-            score = handleEqual(score);
+            return handleEqual();
         } else if (m_score1 >= 4 || m_score2 >= 4) {
-            score = handleEndGame(score);
+            return handleEndGame();
         } else {
-            score = handleMidGame(score);
+            return handleMidGame();
         }
-        return score;
     }
 
-    private String handleMidGame(String score) {
+    private String handleMidGame() {
+        String score = "";
         int tempScore = 0;
 
         for (int i = 1; i < 3; i++) {
@@ -69,35 +68,29 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    private String handleEndGame(String score) {
+    private String handleEndGame() {
         int difference = m_score1 - m_score2;
         if (difference == 1)
-            score = appendPlayer1Name("Advantage");
+            return appendPlayer1Name("Advantage");
         else if (difference == -1)
-            score = appendPlayer2Name("Advantage");
+            return appendPlayer2Name("Advantage");
         else if (difference >= 2)
-            score = appendPlayer1Name(WIN);
+            return appendPlayer1Name(WIN);
         else
-            score = appendPlayer2Name(WIN);
-        return score;
+            return appendPlayer2Name(WIN);
     }
 
-    private String handleEqual(String score) {
+    private String handleEqual() {
         switch (m_score1) {
             case 0:
-                score = LOVE_ALL;
-                break;
+                return LOVE_ALL;
             case 1:
-                score = FIFTEEN_ALL;
-                break;
+                return FIFTEEN_ALL;
             case 2:
-                score = THIRTY_ALL;
-                break;
+                return THIRTY_ALL;
             default:
-                score = DEUCE;
-                break;
+                return DEUCE;
         }
-        return score;
     }
 
     private String appendPlayer1Name(String string) {
