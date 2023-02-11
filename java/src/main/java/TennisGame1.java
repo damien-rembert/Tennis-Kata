@@ -1,8 +1,8 @@
 
 public class TennisGame1 implements TennisGame {
 
-    private int m_score1 = 0;
-    private int m_score2 = 0;
+    private int scorePlayer1 = 0;
+    private int scorePlayer2 = 0;
     private String player1Name;
     private String player2Name;
 
@@ -23,15 +23,15 @@ public class TennisGame1 implements TennisGame {
 
     public void wonPoint(String playerName) {
         if (playerName.equalsIgnoreCase(player1Name))
-            m_score1++;
+            scorePlayer1++;
         else
-            m_score2++;
+            scorePlayer2++;
     }
 
     public String getScore() {
-        if (m_score1 == m_score2) {
+        if (scorePlayer1 == scorePlayer2) {
             return handleEqual();
-        } else if (m_score1 >= 4 || m_score2 >= 4) {
+        } else if (scorePlayer1 >= 4 || scorePlayer2 >= 4) {
             return handleEndGame();
         } else {
             return handleMidGame();
@@ -39,47 +39,35 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String handleMidGame() {
-        return getScoreName(m_score1) + "-" + getScoreName(m_score2);
+        return getScoreName(scorePlayer1) + "-" + getScoreName(scorePlayer2);
     }
 
     private String getScoreName(int score) {
-        switch (score) {
-            case 0:
-                return LOVE;
-            case 1:
-                return FIFTEEN;
-            case 2:
-                return THIRTY;
-            case 3:
-                return FORTY;
-            default:
-                return "";
-        }
+        if (score == 0) return LOVE;
+        if (score == 1) return FIFTEEN;
+        if (score == 2) return THIRTY;
+        return FORTY;
     }
 
     private String handleEndGame() {
-        int difference = m_score1 - m_score2;
+        int difference = scorePlayer1 - scorePlayer2;
         if (difference == 1)
             return appendPlayer1Name("Advantage");
-        else if (difference == -1)
+        if (difference == -1)
             return appendPlayer2Name("Advantage");
-        else if (difference >= 2)
+        if (difference >= 2)
             return appendPlayer1Name(WIN);
-        else
-            return appendPlayer2Name(WIN);
+        return appendPlayer2Name(WIN);
     }
 
     private String handleEqual() {
-        switch (m_score1) {
-            case 0:
+        if (scorePlayer1 == 0)
                 return LOVE_ALL;
-            case 1:
+        if (scorePlayer1 == 1)
                 return FIFTEEN_ALL;
-            case 2:
+        if (scorePlayer1 == 2)
                 return THIRTY_ALL;
-            default:
-                return DEUCE;
-        }
+        return DEUCE;
     }
 
     private String appendPlayer1Name(String string) {
