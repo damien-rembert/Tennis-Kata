@@ -39,33 +39,22 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String handleMidGame() {
-        String score = "";
-        int tempScore = 0;
+        return getScoreName(m_score1) + "-" + getScoreName(m_score2);
+    }
 
-        for (int i = 1; i < 3; i++) {
-
-            if (i == 1)
-                tempScore = m_score1;
-            else {
-                score += "-";
-                tempScore = m_score2;
-            }
-            switch (tempScore) {
-                case 0:
-                    score += LOVE;
-                    break;
-                case 1:
-                    score += FIFTEEN;
-                    break;
-                case 2:
-                    score += THIRTY;
-                    break;
-                case 3:
-                    score += FORTY;
-                    break;
-            }
+    private String getScoreName(int score) {
+        switch (score) {
+            case 0:
+                return LOVE;
+            case 1:
+                return FIFTEEN;
+            case 2:
+                return THIRTY;
+            case 3:
+                return FORTY;
+            default:
+                return "";
         }
-        return score;
     }
 
     private String handleEndGame() {
